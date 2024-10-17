@@ -1,0 +1,12 @@
+STAGE1
+Hisuian Arcanine
+130
+Fighting
+src/main/resources/last_stage.txt
+2/Sharp Fang/100,1/Very Vulnerable/10
+Grass
+-
+2
+Sword & Shield—Lost Origin
+F
+Марк/Чернов/Денисович/БСБО-05-23
