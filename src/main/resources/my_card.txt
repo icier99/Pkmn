@@ -2,7 +2,7 @@ STAGE1
 Morgrem
 90
 DARKNESS
-Impidimp
+src/main/resources/Impidimp.txt
 D/Smash Kick/30,1D/Pierce/50
 PSYCHIC
 -

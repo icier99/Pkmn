@@ -16,16 +16,20 @@ public class CardImport {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             PokemonStage pokemonStage = PokemonStage.valueOf(br.readLine().toUpperCase());
+
             String name = br.readLine();
-            Integer hp = Integer.parseInt(br.readLine());
+
+            int hp = Integer.parseInt(br.readLine());
+
             EnergyType pokemonType = EnergyType.valueOf(br.readLine().toUpperCase());
+
             String evolvesFromName = br.readLine();
-            Card evolvesForm;
+            Card evolvesFrom;
             if (evolvesFromName.equals("-")) {
-                evolvesForm = null;
+                evolvesFrom = null;
             }
             else {
-                evolvesForm = importCard(evolvesFromName);;
+                evolvesFrom = importCard(evolvesFromName);
             }
 
             List<AttackSkill> skills = new ArrayList<>();
@@ -37,13 +41,17 @@ public class CardImport {
                     AttackSkill skill = new AttackSkill(parts[0], parts[1], Integer.parseInt(parts[2]));
                     skills.add(skill);
                 }
-            } else {
+            }
+            else {
                 String[] parts = line.split("/");
                 AttackSkill skill = new AttackSkill(parts[0], parts[1], Integer.parseInt(parts[2]));
                 skills.add(skill);
             }
+
             EnergyType weaknessType = EnergyType.valueOf(br.readLine().toUpperCase());
+
             EnergyType resistanceType;
+
             line = br.readLine();
             if (line.equals("-")) {
                 resistanceType = null;
@@ -51,10 +59,15 @@ public class CardImport {
             else {
                 resistanceType = EnergyType.valueOf(line.toUpperCase());
             }
+
             String retreatCost = br.readLine();
+
             String gameSet = br.readLine();
-            Character regulationMark = br.readLine().charAt(0);
+
+            char regulationMark = br.readLine().charAt(0);
+
             String pokemonOwner_1 = br.readLine();
+
             Student pokemonOwner;
             if (pokemonOwner_1.equals("-")) {
                 pokemonOwner = null;
@@ -63,7 +76,8 @@ public class CardImport {
                 String[] ownerParts = pokemonOwner_1.split("/");
                 pokemonOwner = new Student(ownerParts[0], ownerParts[1], ownerParts[2], ownerParts[3]);
             }
-            return new Card(pokemonStage, name, hp, pokemonType, evolvesForm, skills,
+
+            return new Card(pokemonStage, name, hp, pokemonType, evolvesFrom, skills,
                     weaknessType, resistanceType, retreatCost, gameSet, regulationMark, pokemonOwner);
         }
     }
