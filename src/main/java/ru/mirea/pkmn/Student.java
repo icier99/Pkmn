@@ -4,27 +4,19 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
     public static final long serialVersionUID = 1L;
-    String firstName;
     String surName;
+    String firstName;
     String familyName;
     String group;
 
-    public Student(String firstName, String surName, String familyName, String group) {
-        this.firstName = firstName;
+    public Student(String surName, String firstName, String familyName, String group) {
         this.surName = surName;
+        this.firstName = firstName;
         this.familyName = familyName;
         this.group = group;
     }
 
     public Student() {
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
     }
 
     public String getSurName() {
@@ -33,6 +25,14 @@ public class Student implements Serializable {
 
     public void setSurName(String surName) {
         this.surName = surName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getFamilyName() {
@@ -53,11 +53,10 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "firstName='" + firstName + '\'' +
-                ", surName='" + surName + '\'' +
-                ", familyName='" + familyName + '\'' +
-                ", group='" + group + '\'' +
-                '}';
+        return "Student" +
+                " surName=" + surName +
+                ", firstName=" + firstName +
+                ", familyName=" + familyName +
+                ", group=" + group;
     }
 }

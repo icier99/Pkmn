@@ -1,20 +1,27 @@
 package ru.mirea.pkmn.tarasenkomv;
 
+
+import com.fasterxml.jackson.databind.JsonNode;
 import ru.mirea.pkmn.*;
+import ru.mirea.pkmn.tarasenkomv.web.http.PkmnHttpClient;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.module.ModuleReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CardImport {
 
     public Card importCard(String filePath) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
+
             PokemonStage pokemonStage = PokemonStage.valueOf(br.readLine().toUpperCase());
 
             String name = br.readLine();
@@ -38,15 +45,18 @@ public class CardImport {
                 String[] attackParts = line.split(",");
                 for (String attack : attackParts) {
                     String[] parts = attack.split("/");
-                    AttackSkill skill = new AttackSkill(parts[0], parts[1], Integer.parseInt(parts[2]));
+                    AttackSkill skill = new AttackSkill(parts[0], parts[1], null, Integer.parseInt(parts[2]));
                     skills.add(skill);
                 }
             }
             else {
                 String[] parts = line.split("/");
-                AttackSkill skill = new AttackSkill(parts[0], parts[1], Integer.parseInt(parts[2]));
+                AttackSkill skill = new AttackSkill(parts[0], parts[1], null, Integer.parseInt(parts[2]));
                 skills.add(skill);
             }
+
+
+
 
             EnergyType weaknessType = EnergyType.valueOf(br.readLine().toUpperCase());
 
@@ -76,9 +86,22 @@ public class CardImport {
                 String[] ownerParts = pokemonOwner_1.split("/");
                 pokemonOwner = new Student(ownerParts[0], ownerParts[1], ownerParts[2], ownerParts[3]);
             }
+            String number = br.readLine();
 
+            PkmnHttpClient pkmnHttpClient = new PkmnHttpClient();
+            JsonNode card1 = pkmnHttpClient.getPokemonCard(name, number);
+
+            JsonNode attacksArray = card1.path("data").get(0).path("attacks");
+            int i = 0;
+            for (AttackSkill attackSkill : skills) {
+                attackSkill.setDescription(attacksArray.get(i).path("text").asText());
+                i++;
+                i = i % attacksArray.size();
+            }
             return new Card(pokemonStage, name, hp, pokemonType, evolvesFrom, skills,
-                    weaknessType, resistanceType, retreatCost, gameSet, regulationMark, pokemonOwner);
+                    weaknessType, resistanceType, retreatCost, gameSet, regulationMark, pokemonOwner, number);
+
+
         }
     }
 

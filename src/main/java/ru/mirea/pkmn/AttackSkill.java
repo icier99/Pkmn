@@ -4,18 +4,36 @@ import java.io.Serializable;
 
 public class AttackSkill implements Serializable {
     public static final long serialVersionUID = 1L;
-    String cost;
     String name;
+    String description;
+    String cost;
     int damage;
 
-    public AttackSkill(String cost, String name, int damage) {
+    public AttackSkill(String name, String cost, String description, int damage) {
 
-        this.cost = cost;
         this.name = name;
+        this.description = description;
+        this.cost = cost;
         this.damage = damage;
     }
 
     public AttackSkill() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCost() {
@@ -24,13 +42,6 @@ public class AttackSkill implements Serializable {
 
     public void setCost(String cost) {
         this.cost = cost;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getDamage() {
@@ -43,10 +54,9 @@ public class AttackSkill implements Serializable {
 
     @Override
     public String toString() {
-        return "AttackSkill{" +
-                "cost='" + cost + '\'' +
-                ", name='" + name + '\'' +
-                ", damage=" + damage +
-                '}';
+        return  "name=" + name +
+                ", description=" + description  +
+                ", cost=" + cost +
+                ", damage=" + damage;
     }
 }

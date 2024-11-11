@@ -17,6 +17,7 @@ public class Card implements Serializable {
     String gameSet;
     char regulationMark;
     Student pokemonOwner;
+    String number;
 
     public Card(PokemonStage pokemonStage,
                 String name,
@@ -29,7 +30,8 @@ public class Card implements Serializable {
                 String retreatCost,
                 String gameSet,
                 char regulationMark,
-                Student pokemonOwner) {
+                Student pokemonOwner,
+                String number) {
         this.pokemonStage = pokemonStage;
         this.name = name;
         this.hp = hp;
@@ -42,6 +44,7 @@ public class Card implements Serializable {
         this.gameSet = gameSet;
         this.regulationMark = regulationMark;
         this.pokemonOwner = pokemonOwner;
+        this.number = number;
     }
 
     public Card() {
@@ -139,20 +142,29 @@ public class Card implements Serializable {
         this.pokemonOwner = pokemonOwner;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     @Override
     public String toString() {
         return
                 "\n\npokemonStage=" + pokemonStage +
-                "\nname='" + name + '\'' +
+                "\nname=" + name +
                 "\nhp=" + hp +
                 "\npokemonType=" + pokemonType +
                 "\nevolvesFrom=" + evolvesFrom +
                 "\nskills=" + skills +
                 "\nweaknessType=" + weaknessType +
                 "\nresistanceType=" + resistanceType +
-                "\nretreatCost='" + retreatCost + '\'' +
-                "\ngameSet='" + gameSet + '\'' +
+                "\nretreatCost=" + retreatCost  +
+                "\ngameSet=" + gameSet  +
                 "\nregulationMark=" + regulationMark +
-                "\npokemonOwner=" + pokemonOwner + "\n";
+                "\npokemonOwner=" + pokemonOwner +
+                "\nnumber=" + number + "\n";
     }
 }

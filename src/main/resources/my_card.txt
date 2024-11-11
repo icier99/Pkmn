@@ -3,10 +3,11 @@ Morgrem
 90
 DARKNESS
 src/main/resources/Impidimp.txt
-D/Smash Kick/30,1D/Pierce/50
+Smash Kick/D/30,Pierce/1D/50
 PSYCHIC
 -
 1
 Sword & Shield—Brilliant Stars
 F
 Tarasenko/Maksim/Vyacheslavovich/BSBO-05-23
+93
