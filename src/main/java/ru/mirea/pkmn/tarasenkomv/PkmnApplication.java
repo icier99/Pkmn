@@ -23,19 +23,19 @@ public class PkmnApplication {
         System.out.println(anothercard);
 
         //PkmnHttpClient pkmnHttpClient = new PkmnHttpClient();
-        //JsonNode card1 = pkmnHttpClient.getPokemonCard(card.getName(), card.getNumber());
+        //JsonNode card1 = pkmnHttpClient.getPokemonCard("Azumarill", "59");
         //System.out.println(card1.toPrettyString());
 
         DatabaseServiceImpl db = new DatabaseServiceImpl();
-        //db.getAllStudents();
+        db.getAllStudents();
         db.getAllCards();
-        //db.createPokemonOwner(card.getPokemonOwner());
+
         //System.out.println(db.getStudentFromDatabase(card.getPokemonOwner().getSurName()));
-        //System.out.println(db.getCardFromDatabase("Impidimp"));
+        System.out.println(db.getCardFromDatabase("Corvisquire"));
 
+
+        //db.createPokemonOwner(card.getPokemonOwner());
         //db.saveCardToDatabase(card);
-
-
         System.exit(0);
     }
 }

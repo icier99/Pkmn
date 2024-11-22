@@ -12,8 +12,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.UUID;
-
 
 public class DatabaseServiceImpl implements DatabaseService {
     private final Connection connection;
@@ -35,14 +33,13 @@ public class DatabaseServiceImpl implements DatabaseService {
     public Card getCardFromDatabase(String cardName) throws SQLException, JsonProcessingException {
         Card card = null;
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM card WHERE \"name\" = '" + cardName + "' AND pokemon_owner IS NOT NULL;");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM card WHERE \"name\" = '" + cardName + "';");
 
-        if (!resultSet.next()) {
+        if (!resultSet.isBeforeFirst()) {
             resultSet = statement.executeQuery("SELECT * FROM card WHERE \"id\" = '" + cardName + "';");
         }
 
         if (resultSet.next()) {
-
             PokemonStage pokemonStage = null;
             if (!resultSet.getString("stage").equals("null")) {
                 pokemonStage = PokemonStage.valueOf(resultSet.getString("stage")); }
@@ -52,7 +49,6 @@ public class DatabaseServiceImpl implements DatabaseService {
             int hp = Integer.parseInt(resultSet.getString("hp"));
 
             EnergyType pokemonType = null;
-            System.out.println(resultSet.getString("evolves_from"));
             if (!resultSet.getString("pokemon_type").equals("null")) {
                 pokemonType = EnergyType.valueOf(resultSet.getString("pokemon_type")); }
 
@@ -76,11 +72,11 @@ public class DatabaseServiceImpl implements DatabaseService {
             }
 
             EnergyType weaknessType = null;
-            if (!resultSet.getString("weakness_type").equals("null")) {
+            if (resultSet.getString("weakness_type") != null && !resultSet.getString("weakness_type").equals("null")) {
                 weaknessType = EnergyType.valueOf(resultSet.getString("weakness_type")); }
 
             EnergyType resistanceType = null;
-            if (!resultSet.getString("resistance_type").equals("null")) {
+            if (resultSet.getString("resistance_type") != null && !resultSet.getString("resistance_type").equals("null")) {
                 resistanceType = EnergyType.valueOf(resultSet.getString("resistance_type")); }
 
             String retreatCost = resultSet.getString("retreat_cost");
